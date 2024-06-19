@@ -1,0 +1,13 @@
+<template>
+    <c-child-component
+         count={var1}
+         ondispatchinfo={handleDispatch}
+    ></c-child-component>
+    parent var value: {dummy}
+    <template for:each={arr} for:item="obj" >
+        <div key={obj.key}>
+            {obj.name}
+        </div>
+        
+    </template>
+</template>

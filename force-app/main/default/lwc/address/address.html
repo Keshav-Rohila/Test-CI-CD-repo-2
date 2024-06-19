@@ -1,0 +1,84 @@
+<template>
+    <lightning-card title="Address" icon-name="standard:address">
+        <div lwc:if={isLoading}>
+            <lightning-spinner alternative-text="Loading" size="x-small"></lightning-spinner>
+        </div>
+        <div class="slds-p-horizontal_medium">
+            <div class="slds-form-element">
+                <label class="slds-form-element__label" for="combobox-id-14">Search Address</label>
+                <div class="slds-form-element__control">
+                    <div class="slds-combobox_container">
+                        <div class="slds-combobox slds-dropdown-trigger slds-dropdown-trigger_click slds-is-open"
+                            aria-expanded="true" aria-haspopup="listbox" role="combobox">
+                            <div class="slds-combobox__form-element slds-input-has-icon slds-input-has-icon_right"
+                                role="none">
+                                <lightning-input label="input text" type="search" onchange={handleChange}
+                                    value={selectedValue} variant="label-hidden"></lightning-input>
+                            </div>
+                            <div lwc:if={searchSuggestionList.length}>
+                                <div id="listbox-id-11" class="slds-dropdown slds-dropdown_length-5 slds-dropdown_fluid"
+                                    role="listbox">
+                                    <ul class="slds-listbox slds-listbox_vertical" role="presentation">
+                                        <template for:each={searchSuggestionList} for:item="suggestion">
+                                            <li key={suggestion.place_id} role="presentation" class="slds-listbox__item">
+                                                <div data-recid={suggestion.description} onclick={handleSelection}
+                                                    class="slds-media slds-listbox__option slds-listbox__option_plain slds-media_small"
+                                                    role="option">
+                                                    <span class="slds-media__figure slds-listbox__option-icon"></span>
+                                                    <span class="slds-media__body">
+                                                        <span class="slds-truncate" title={suggestion.description}>{suggestion.description}</span>
+                                                    </span>
+                                                </div>
+                                            </li>
+                                        </template>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- <lightning-input name="search" label="Search Address" type="search"
+                onchange={handleSearchKeyChange}></lightning-input> -->
+
+            <div class="slds-grid slds-gutters">
+                <div class="slds-col slds-size_2-of-3" lwc:if={showAddressTypeInput}>
+                    <c-custom-multi-pick-list pick-list-options={addressTypeOptions} label="Address Type"
+                        required={isAddressTypeRequired} showpills={showpills}
+                        onselection={handleAddressTypeSelection}></c-custom-multi-pick-list>
+                </div>
+                <div class="slds-col slds-size_1-of-3">
+                    <lightning-input type="checkbox" label="Primary" class="slds-m-top_large" checked={address.primary} onchange={handleInputChange}></lightning-input>
+                </div>
+            </div>
+
+
+            <div>
+                <div>
+                    <lightning-input type="text" label="Street" value={address.street} onchange={handleInputChange} required></lightning-input>
+                </div>
+                <div class="slds-grid slds-gutters">
+                    <div class="slds-col">
+                        <lightning-input type="text" label="City" value={address.city} onchange={handleInputChange} required></lightning-input>
+                    </div>
+                    <div class="slds-col">
+                        <lightning-input type="text" label="State" value={address.state} onchange={handleInputChange} required></lightning-input>
+                    </div>
+                </div>
+                <div class="slds-grid slds-gutters">
+                    <div class="slds-col">
+                        <lightning-input type="text" label="Country" value={address.country} onchange={handleInputChange} required></lightning-input>
+                    </div>
+                    <div class="slds-col">
+                        <lightning-input type="text" label="Postal Code" value={address.postalCode} onchange={handleInputChange} required></lightning-input>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div slot="footer">
+            <lightning-button variant="brand" label="Save" title="Save Address" onclick={handleSave} ></lightning-button>
+        </div>
+
+    </lightning-card>
+</template>
