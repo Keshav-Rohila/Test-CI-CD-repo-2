@@ -52,7 +52,7 @@ jobs:
               run: sfdx auth:sfdxurl:store -f ./ACC_SFDX_URL.txt -a QA -d
 
             - name: 'Deploy the entire branch to Integration org'
-              run: sfdx force:source:deploy -p force-app --testlevel RunLocalTests --json -u nishant@aptclouds.cicd
+              run: sfdx force:source:deploy -p force-app --testlevel RunLocalTests --json -u multiple.address@aptclouds.com.dev
 
             
 
