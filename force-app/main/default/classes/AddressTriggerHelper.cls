@@ -1,6 +1,6 @@
 public class AddressTriggerHelper {
     // Before Insert of the Address to check there is no more than one Primary address on the same type on the same related record 
-    // Updated comment
+    // Updated  
     public static void beforeInsert(List<Address__c> newList){
         try{
             Set<String> relatedRecordIdSet = new Set<String>();
